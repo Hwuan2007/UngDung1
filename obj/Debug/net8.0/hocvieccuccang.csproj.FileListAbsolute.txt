@@ -12,3 +12,7 @@ C:\xampp\htdocs\hocvieccuccang\obj\Debug\net8.0\refint\hocvieccuccang.dll
 C:\xampp\htdocs\hocvieccuccang\obj\Debug\net8.0\hocvieccuccang.pdb
 C:\xampp\htdocs\hocvieccuccang\obj\Debug\net8.0\hocvieccuccang.genruntimeconfig.cache
 C:\xampp\htdocs\hocvieccuccang\obj\Debug\net8.0\ref\hocvieccuccang.dll
+C:\xampp\htdocs\hocvieccuccang\obj\Debug\net8.0\hocvieccuccang.sourcelink.json
+C:\xampp\htdocs\hocvieccuccang\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\xampp\htdocs\hocvieccuccang\obj\Debug\net8.0\hocvieccuccang.csproj.AssemblyReference.cache
+C:\xampp\htdocs\hocvieccuccang\obj\Debug\net8.0\hocvieccuccang.csproj.CopyComplete

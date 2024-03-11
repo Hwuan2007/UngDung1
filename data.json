@@ -1,0 +1,47 @@
+[
+  {
+    "MaNhanVien": "NV-0001",
+    "HoTen": "Nhân viên 1",
+    "NgaySinh": "05/06/2015",
+    "SoDienThoai": "0312945712",
+    "DiaChi": "Địa chỉ nhân viên 1",
+    "ChucVu": "Chức vụ nhân viên 1",
+    "SoNamCongTac": 5
+  },
+  {
+    "MaNhanVien": "NV-0002",
+    "HoTen": "Nhân viên 2",
+    "NgaySinh": "25/01/2007",
+    "SoDienThoai": "0231836727",
+    "DiaChi": "Địa chỉ nhân viên 2",
+    "ChucVu": "Chức vụ nhân viên 2",
+    "SoNamCongTac": 4
+  },
+  {
+    "MaNhanVien": "NV-0003",
+    "HoTen": "Nhân viên 3",
+    "NgaySinh": "17/03/1991",
+    "SoDienThoai": "0229355354",
+    "DiaChi": "Địa chỉ nhân viên 3",
+    "ChucVu": "Chức vụ nhân viên 3",
+    "SoNamCongTac": 2
+  },
+  {
+    "MaNhanVien": "NV-0004",
+    "HoTen": "Nhân viên 4",
+    "NgaySinh": "28/05/1994",
+    "SoDienThoai": "0706843642",
+    "DiaChi": "Địa chỉ nhân viên 4",
+    "ChucVu": "Chức vụ nhân viên 4",
+    "SoNamCongTac": 9
+  },
+  {
+    "MaNhanVien": "NV-0005",
+    "HoTen": "Nhân viên 5",
+    "NgaySinh": "11/03/2010",
+    "SoDienThoai": "0657682937",
+    "DiaChi": "Địa chỉ nhân viên 5",
+    "ChucVu": "Chức vụ nhân viên 5",
+    "SoNamCongTac": 6
+  }
+]

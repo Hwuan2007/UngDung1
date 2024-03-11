@@ -1,12 +1,9 @@
 using System;
-using System.Collections.Generic;
 using Models;
 using DataAccess;
 using System.Text;
 using System.Globalization;
-using System.IO;
-using System.Text.Json;
-
+using Newtonsoft.Json;
 
 namespace ung_dung
 {
@@ -17,10 +14,17 @@ namespace ung_dung
         {
             Console.OutputEncoding = Encoding.Unicode;
             Console.InputEncoding = Encoding.Unicode;
+            string fileName = "data.json"; 
+            LoadDuLieuTuFile(fileName);
             
+            if (danhSachNhanVien == null || danhSachNhanVien.Count == 0)
+            {
+                Console.WriteLine("Không có dữ liệu trong file, sẽ tạo ngẫu nhiên danh sách nhân viên.");
+                NhanVienDataAccess dataAccess = new NhanVienDataAccess();
+                danhSachNhanVien = dataAccess.nhanvienngaunhien();
+            }
+
             bool running = true;
-            NhanVienDataAccess dataAccess = new NhanVienDataAccess();
-            danhSachNhanVien = dataAccess.nhanvienngaunhien();
             while (running)
             {
                 Console.WriteLine();
@@ -474,21 +478,42 @@ namespace ung_dung
                 Console.WriteLine("Không có dữ liệu để lưu.");
                 return;
             }
-
-            Console.Write("Nhập tên file để lưu (bao gồm cả đuôi .json): ");
-            string fileName = Console.ReadLine();
+            string fileName = "data.json";
 
             try
             {
-                using (FileStream fs = File.Create(fileName))
+                using (StreamWriter sw = new StreamWriter(fileName))
                 {
-                    JsonSerializer.SerializeAsync(fs, danhSachNhanVien);
-                    Console.WriteLine("Danh sách nhân viên đã được lưu thành công.");
+                    string jsonData = JsonConvert.SerializeObject(danhSachNhanVien, Formatting.Indented);
+                    sw.Write(jsonData);
                 }
+                Console.WriteLine("Danh sách nhân viên đã được lưu thành công.");
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Đã xảy ra lỗi khi lưu file: {ex.Message}");
+            }
+
+        }
+        // Đọc file json
+        static void LoadDuLieuTuFile(string fileName)
+        {
+            try
+            {
+                if (File.Exists(fileName))
+                {
+                    string jsonData = File.ReadAllText(fileName);
+                    danhSachNhanVien = JsonConvert.DeserializeObject<List<NhanVien>>(jsonData);
+                    Console.WriteLine("Dữ liệu đã được tải từ file.");
+                }
+                else
+                {
+                    Console.WriteLine("File dữ liệu không tồn tại.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Đã xảy ra lỗi khi tải dữ liệu từ file: {ex.Message}");
             }
         }
         //tạo quy luật nhập sdt
@@ -540,5 +565,6 @@ namespace ung_dung
         
    
     }
-    
+
+
 }

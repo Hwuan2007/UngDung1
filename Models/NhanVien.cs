@@ -1,7 +1,5 @@
 using System;
-using System.Collections.Generic;
 using Models;
-using System.ComponentModel.DataAnnotations;
 
 namespace Models
 {
@@ -34,14 +32,11 @@ namespace DataAccess
     
     public class NhanVienDataAccess
     {
-        
         private Random random = new Random();
         //Tạo danh sach nhân viên ngẫu nhiên
         public List<NhanVien> nhanvienngaunhien()
         {
-            
             List<NhanVien> danhSachNhanVien = new List<NhanVien>();
-
             for (int i = 0; i < 5; i++)
             {
                 NhanVien nhanVien = new NhanVien();
@@ -55,7 +50,6 @@ namespace DataAccess
 
                 danhSachNhanVien.Add(nhanVien);
             }
-
             return danhSachNhanVien;
         }
 
@@ -68,6 +62,7 @@ namespace DataAccess
             DateTime ngaySinh = ngayBatDau.AddDays(soNgayNgauNhien).Date;
             return ngaySinh.ToString("dd/MM/yyyy");
         }
+
         //đặt quy luật random sdt
         private string SoDienThoai()
         {
