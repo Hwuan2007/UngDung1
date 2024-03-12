@@ -516,10 +516,7 @@ namespace ung_dung
         }
         static NhanVien TimNhanVienTheoID(string maNhanVien)
         {
-            // Chuyển ID cần tìm và ID trong danh sách về cùng một định dạng (chữ thường)
             maNhanVien = maNhanVien.ToLower();
-
-            // Tìm kiếm nhân viên theo ID
             return danhSachNhanVien.FirstOrDefault(nv => nv.MaNhanVien.ToLower() == maNhanVien);
         }
         //tạo quy luật nhập sdt
