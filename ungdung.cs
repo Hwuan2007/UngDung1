@@ -30,13 +30,13 @@ namespace ung_dung
                 Console.WriteLine();
                 Console.WriteLine("+---------------MENU---------------+");
                 Console.WriteLine("|                                  |");
-                Console.WriteLine("|  1.Hiển thị danh sách nhân viên  |");
-                Console.WriteLine("|  2.Thêm mới nhân viên            |");
-                Console.WriteLine("|  3.Sửa thông tin nhân viên       |");
-                Console.WriteLine("|  4.Xóa nhân viên                 |");
+                Console.WriteLine("|  1 .Hiển thị danh sách nhân viên |");
+                Console.WriteLine("|  2. Thêm mới nhân viên           |");
+                Console.WriteLine("|  3. Sửa thông tin nhân viên      |");
+                Console.WriteLine("|  4. Xóa nhân viên                |");
                 Console.WriteLine("|  5. Tìm kiếm                     |");
                 Console.WriteLine("|  6. Lưu ra File                  |");
-                Console.WriteLine("|  0.Thoát                         |");
+                Console.WriteLine("|  0. Thoát                        |");
                 Console.WriteLine("|                                  |");
                 Console.WriteLine("+----------------------------------+");
                 Console.WriteLine("Hãy nhập lựa chọn của bạn: ");
@@ -65,15 +65,15 @@ namespace ung_dung
                         EscapeButton();
                         break;
                     case 5:
-                    Console.WriteLine("Bạn đã chọn 'Tìm kiếm'");
-                    TimKiemNhanVien();
-                    EscapeButton();
+                        Console.WriteLine("Bạn đã chọn 'Tìm kiếm'");
+                        TimKiemNhanVien();
+                        EscapeButton();
                     break;
                     case 6:
-                    Console.WriteLine("Bạn đã chọn 'Lưu ra File'");
-                    LuuDanhSachNhanVien();
-                    EscapeButton();
-                    break;
+                        Console.WriteLine("Bạn đã chọn 'Lưu ra File'");
+                        LuuDanhSachNhanVien();
+                        EscapeButton();
+                        break;
                     case 0:
                         Console.WriteLine("Bạn đã chọn 'Thoát'");
                         running = false;
@@ -244,7 +244,7 @@ namespace ung_dung
             Console.Write("Nhập mã nhân viên cần chỉnh sửa: ");
             string maNhanVienSua = Console.ReadLine();
 
-            NhanVien nhanVienCanSua = danhSachNhanVien.FirstOrDefault(nv => nv.MaNhanVien == maNhanVienSua);
+            NhanVien nhanVienCanSua =  TimNhanVienTheoID(maNhanVienSua);
 
             if (nhanVienCanSua != null)
             {
@@ -405,9 +405,7 @@ namespace ung_dung
         static void XoaNhanVien(){
             Console.Write("Nhập mã nhân viên cần chỉnh sửa: ");
             string maNhanVienXoa = Console.ReadLine();
-
-            NhanVien nhanVienCanXoa = danhSachNhanVien.FirstOrDefault(nv => nv.MaNhanVien == maNhanVienXoa);
-
+            NhanVien nhanVienCanXoa = TimNhanVienTheoID(maNhanVienXoa);
 
             if (nhanVienCanXoa != null)
             {
@@ -450,7 +448,6 @@ namespace ung_dung
             string keyword = Console.ReadLine().ToLower();
 
             List<NhanVien> result = danhSachNhanVien.FindAll(key => key.HoTen.Contains(keyword) || key.DiaChi.Contains(keyword));
-
             if (result.Count > 0)
             {
                 Console.WriteLine("Kết quả tìm kiếm:");
@@ -470,6 +467,7 @@ namespace ung_dung
                 Console.WriteLine("Không tìm thấy nhân viên nào phù hợp với từ khóa tìm kiếm.");
             }
         }
+        
         //Lưu file Json
         static void LuuDanhSachNhanVien()
         {
@@ -516,6 +514,14 @@ namespace ung_dung
                 Console.WriteLine($"Đã xảy ra lỗi khi tải dữ liệu từ file: {ex.Message}");
             }
         }
+        static NhanVien TimNhanVienTheoID(string maNhanVien)
+        {
+            // Chuyển ID cần tìm và ID trong danh sách về cùng một định dạng (chữ thường)
+            maNhanVien = maNhanVien.ToLower();
+
+            // Tìm kiếm nhân viên theo ID
+            return danhSachNhanVien.FirstOrDefault(nv => nv.MaNhanVien.ToLower() == maNhanVien);
+        }
         //tạo quy luật nhập sdt
         private static bool IsValidPhoneNumber(string phoneNumber)
         {
@@ -536,16 +542,13 @@ namespace ung_dung
         //tạo id nhận viên tự động
         static string UpdateMaNhanVien()
         {
-            Random random = new Random();
-            while (true)
-            {
-                int randomNumber = random.Next(1, 10000);
-                string maNhanVien = "NV-" + randomNumber.ToString("0000");
-                if (!danhSachNhanVien.Any(nv => nv.MaNhanVien == maNhanVien))
-                {
-                    return maNhanVien; 
-                }
-            }
+            string maxId = danhSachNhanVien.Max(nv => nv.MaNhanVien);
+            string numId = maxId.Substring(3); 
+            int currentNum = int.Parse(numId);
+            int nextNum = currentNum + 1;
+            string maNhanVienMoi = "NV-" + nextNum.ToString("0000");
+
+            return maNhanVienMoi;
         }
         //Nút thoát tác vụ
         static void EscapeButton()
